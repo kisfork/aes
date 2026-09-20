@@ -543,7 +543,7 @@ static void ctr_inc(unsigned char *ctr_blk)
         *(uint32_t*)(ctr_blk + 12) = *(uint32_t*)(ctr_blk + 12) + 1;
 }
 
-AES_RETURN aes_CTR_encrypt(const unsigned char *in,
+AES_RETURN AES_CTR_encrypt(const unsigned char *in,
     unsigned char *out,
     const unsigned char ivec[8],
     const unsigned char nonce[4],
