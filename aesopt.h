@@ -468,7 +468,7 @@ Issue Date: 20/12/2007
 #endif
 
 /* define to reverse decryption key schedule    */
-#if 1 || defined( USE_VIA_ACE_IF_PRESENT ) && !defined ( AES_REV_DKS )
+#if 1
 #  define AES_REV_DKS
 #endif
 
