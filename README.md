@@ -353,6 +353,23 @@ Libraries
 			used in subsequent testing.  Hence testing is always for the 
 			last DLL built.
 			
+C.1 Building on Linux/macOS (non-Windows)
+------------------------------------------
+
+For non-Windows platforms a Makefile is provided that builds the C +
+AES-NI intrinsics variant of the library (aescrypt.c, aeskey.c, aestab.c,
+aes_modes.c, aes_ni.c) with GCC or Clang on a modern x86-64 host:
+
+    make            builds libaes.a (CFLAGS defaults to -O2 -Wall -maes
+                    -mssse3; override with e.g. 'make CFLAGS=...')
+    make test       builds and runs the built-in known-answer test
+                    (aestst.c) and fails if it does not report success
+    make examples   builds the aesxam.c file-encryption example
+    make clean      removes all build artifacts
+
+This Makefile does not cover the legacy YASM assembler variants or VIA ACE
+support described elsewhere in this file.
+
 D. Testing
 ----------
 
