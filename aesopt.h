@@ -217,9 +217,14 @@ Issue Date: 20/12/2007
     order (which later checks below ensure).
 
 	AES_REV_DKS must be set for assembler code used with a VIA ACE build
+
+    VIA ACE hardware (VIA/Centaur C3/C7 processors, c.2003-2005) is long
+    obsolete, so this is no longer auto-enabled on qualifying 32-bit x86
+    builds. Define USE_VIA_ACE_IF_PRESENT yourself (or set the '1' below)
+    to opt back in.
 */
 
-#if 1 && defined( VIA_ACE_POSSIBLE ) && !defined( USE_VIA_ACE_IF_PRESENT )
+#if 0 && defined( VIA_ACE_POSSIBLE ) && !defined( USE_VIA_ACE_IF_PRESENT )
 #  define USE_VIA_ACE_IF_PRESENT
 #endif
 

@@ -451,7 +451,11 @@ F. Use of the VIA ACE Cryptography Engine (x86 only)
 The use of the code with the VIA ACE cryptography engine in described in the
 file via_ace.txt. In outline aes_modes.c is used and USE_VIA_ACE_IF_PRESENT
 is defined either in section 2 of aesopt.h or as a compilation option in Visual
-Studio. If in addition ASSUME_VIA_ACE_PRESENT is also defined then all normal
+Studio. Note that VIA ACE support (only relevant to the long obsolete VIA/
+Centaur C3/C7 processors) is opt-in only: it is no longer defined
+automatically, so it must be enabled explicitly by defining
+USE_VIA_ACE_IF_PRESENT as described above. If in addition
+ASSUME_VIA_ACE_PRESENT is also defined then all normal
 AES code will be removed if not needed to support VIA ACE use.  If VIA ACE
 support is needed and AES assembler is being used only the ASM_X86_V1C and
 ASM_X86_V2C versions should be used since ASM_X86_V2 and ASM_AMD64 do not
