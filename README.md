@@ -2,6 +2,12 @@
 An AES (Rijndael) Implementation in C/C++ (as specified in FIPS-197)
 ====================================================================
 
+Change (26/08/2025)
+===================
+
+1. Move Output directory for the Python Binding from lib to lib_python
+   becasue its ouputs were inconsistent with normal aes library builds
+
 Change (26/09/2018)
 ===================
 
@@ -139,7 +145,9 @@ vb.txt          Visual Basic code from the above example (win32 only)
 aesxam.c        an example of AES use
 tablegen.c      a program to generate a simplified 'aestab.c' file for
                 use with compilers that find aestab.c too complex
-yasm.rules      the YASM build rules file for Microsoft Visual Studio 2005
+vsyasm.props    the YASM build properties file for Microsoft Visual Studio
+vsyasm.targets  the YASM build targets file for Microsoft Visual Studio
+vsyasm.xml      the YASM build rules file for Microsoft Visual Studio
 via_ace.txt     describes support for the VIA ACE cryptography engine
 aes.txt         this file
 
@@ -191,64 +199,64 @@ but the following descriptions should allow them to be built in other x86
 environments
 
     lib_generic_c       Win32 and x64
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
 		                (+ aes_ni.h for AES_NI)
         C source:       aescrypt.c, aeskey.c, aestab.c, aes_modes.c
 		                (+ aes_ni.c for AES_NI)
         defines
 
     dll_generic_c       Win32 and x64
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
 		                (+ aes_ni.h for AES_NI)
         C source:       aescrypt.c, aeskey.c, aestab.c, aes_modes.c
 		                (+ aes_ni.c for AES_NI)
         defines         DLL_EXPORT
 
     lib_asm_x86_v1c     Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aeskey.c, aestab.c, aes_modes.c
         x86 assembler:  aes_x86_v1.asm
         defines         ASM_X86_V1C (set for C and assembler files)
     
 	dll_asm_x86_v1c Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aeskey.c, aestab.c, aes_modes.c
         x86 assembler:  aes_x86_v1.asm
         defines         DLL_EXPORT, ASM_X86_V1C (set for C and assembler files)
 
     lib_asm_x86_v2c     Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aeskey.c, aestab.c, aes_modes.c
         x86 assembler:  aes_x86_v2.asm
         defines         ASM_X86_V2C (set for C and assembler files)
     
 	dll_asm_x86_v2c     Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aeskey.c, aestab.c, aes_modes.c
-        x86 assembler:  aes_x86_v1.asm
+        x86 assembler:  aes_x86_v2.asm
         defines          DLL_EXPORT, ASM_X86_V2C (set for C and assembler files)
 
     lib_asm_x86_v2      Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aes_modes.c 
-        x86 assembler:  aes_x86_v1.asm
+        x86 assembler:  aes_x86_v2.asm
         defines         ASM_X86_V2 (set for C and assembler files)
     
 	dll_asm_x86_v2  Win32
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
         C source:       aes_modes.c
-        x86 assembler:  aes_x86_v1.asm
-        defines         DLL_EXPORT, ASM_AMD64_C (set for C and assembler files)
+        x86 assembler:  aes_x86_v2.asm
+        defines         DLL_EXPORT, ASM_X86_V2 (set for C and assembler files)
 
     lib_asm_amd64_c     x64
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
 		                (+ aes_ni.h for AES_NI)
         C source:       aeskey.c, aestab.c, aes_modes.c (+ aes_ni.c for AES_NI)
         x86 assembler:  aes_amd64.asm
         defines         ASM_AMD64_C (set for C and assembler files)
     
 	dll_asm_amd64_c     x64
-        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, tdefs.h
+        headers:        aes.h, aesopt.h, aestab.h, brg_endian.h, brg_types.h
 		                (+ aes_ni.h for AES_NI)
         C source:       aeskey.c, aestab.c, aes_modes.c (+ aes_ni.c for AES_NI)
         x86 assembler:  aes_amd64.asm
@@ -384,8 +392,9 @@ linking can be used by adding the lib file associated with the AES DLL (in the a
 sub-directory) to the build (under project Properties|Linker in Visual Studio) and 
 removing the DLL_DYNAMIC_LOAD define (under project Properties|C/C++|Preprocessor).
 
-0  Link is linked into this project and the symbol
-DLL_DYNAMIC_LOAD is left undefined, then implicit linking will be used
+If the lib file associated with the AES DLL is linked into this project and
+the symbol DLL_DYNAMIC_LOAD is left undefined, then implicit linking will be
+used.
 
 The above tests take command line arguments that determine which test are run
 as follows:
